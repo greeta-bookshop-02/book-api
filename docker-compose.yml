@@ -53,20 +53,18 @@ services:
     networks:
       - bookshop
 
-  mysql:
+  bookshop-mysql:
     image: mysql:8.1.0
-    container_name: mysql
+    container_name: bookshop_mysql
     restart: unless-stopped
     ports:
       - "3306:3306"
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=test1234!
-#      - MYSQL_DATABASE=reactlibrarydatabase
+    environment:
+      - MYSQL_ROOT_PASSWORD=test1234!
     volumes:
-      - ./mysql/01-create-user.sql:/docker-entrypoint-initdb.d/01-create-user.sql
-      - ./mysql/02-create-products.sql:/docker-entrypoint-initdb.d/02-create-products.sql
-      - ./mysql/03-countries-and-states.sql:/docker-entrypoint-initdb.d/03-countries-and-states.sql
-      - ./mysql/04-create-order-tables.sql:/docker-entrypoint-initdb.d/04-create-order-tables.sql
+      - ./docker-conf/mysql/01-create-products.sql:/docker-entrypoint-initdb.d/01-create-products.sql
+      - ./docker-conf/mysql/02-countries-and-states.sql:/docker-entrypoint-initdb.d/02-countries-and-states.sql
+      - ./docker-conf/mysql/03-create-order-tables.sql:/docker-entrypoint-initdb.d/03-create-order-tables.sql
     healthcheck:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
     networks:

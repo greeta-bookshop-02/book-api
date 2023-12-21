@@ -27,7 +27,7 @@ public class ImageImporter implements ApplicationRunner {
   @Override
   public void run(ApplicationArguments args) throws Exception {
     final var resourcePatternResolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
-    final var images = Arrays.asList(resourcePatternResolver.getResources("classpath:images/**"));
+    final var images = Arrays.asList(resourcePatternResolver.getResources("classpath:images/products/books/**"));
     uploadImages(images);
   }
 
