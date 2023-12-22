@@ -25,7 +25,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api", "/api/**").permitAll()
-                        .requestMatchers("/api", "/api/**").hasRole(BOOKSHOP_USER)
+                        .requestMatchers("/api", "/api/**").hasAnyRole(BOOKSHOP_MANAGER, BOOKSHOP_USER)
 
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(
